@@ -1,27 +1,41 @@
 # alx-project-0x14
 
 ## API Overview
-The MoviesDatabase API provides a comprehensive way to access information about movies, TV shows, actors, and related media. You can search for titles, retrieve detailed information about a specific movie or show, get popular and trending content, and access user ratings and reviews.
+The MoviesDatabase API provides a comprehensive collection of information about movies, TV shows, episodes, and actors. It includes details such as YouTube trailer URLs, awards, full biographies, ratings, cast & crew, production info, and many other useful fields. The API has data for over 9 million titles and 11 million actors/crew members, updated regularly.  
+
+Support the developers: [Buy Me a Coffee](https://www.buymeacoffee.com/SAdrian13)
 
 ## Version
 The current version of the API is **v1**.  
-*(Replace "v1" with the actual version from the API documentation if different.)*
 
 ## Available Endpoints
-Here are some of the main endpoints available in the MoviesDatabase API:
 
-- **GET /movies/popular**: Retrieves a list of currently popular movies.
-- **GET /movies/top-rated**: Fetches top-rated movies.
-- **GET /movies/{id}**: Gets detailed information about a specific movie by its ID.
-- **GET /tv/popular**: Retrieves a list of popular TV shows.
-- **GET /tv/{id}**: Gets detailed information about a specific TV show by its ID.
-- **GET /search/movie**: Searches for movies based on a query string.
-- **GET /search/tv**: Searches for TV shows based on a query string.
+### Titles
+- **GET /titles**: Returns an array of titles according to provided filters/sorting.
+- **GET /x/titles-by-ids**: Returns an array of titles based on an array of IMDb IDs.
+- **GET /titles/{id}**: Returns a single title by IMDb ID.
+- **GET /titles/{id}/ratings**: Returns the rating and number of votes for a title.
+- **GET /titles/series/{id}**: Returns episodes for a series (episode ID, number, and season number).
+- **GET /titles/seasons/{id}**: Returns the number of seasons for a series.
+- **GET /titles/series/{id}/{season}**: Returns episodes for a specific season.
+- **GET /titles/episode/{id}**: Returns details of a specific episode.
+- **GET /titles/x/upcoming**: Returns upcoming titles.
+- **GET /titles/search/keyword/{keyword}**: Search titles by keyword.
+- **GET /titles/search/title/{title}**: Search titles by full or partial title.
+- **GET /titles/search/akas/{aka}**: Search titles by AKA (exact match only).
 
-*(Add more endpoints as necessary based on the documentation.)*
+### Actors
+- **GET /actors**: Returns a list of actors.
+- **GET /actors/{id}**: Returns details of a specific actor.
+
+### Utils
+- **GET /title/utils/titleType**: Returns available title types.
+- **GET /title/utils/genres**: Returns available genres.
+- **GET /title/utils/lists**: Returns available predefined title lists.
 
 ## Request and Response Format
-Typical request structure:
+All endpoints return an object with a `results` key. Endpoints with pagination also include `page`, `next`, and `entries`.  
 
+**Example request:**
 ```http
-GET https://api.moviesdatabase.com/movies/{id}?api_key=YOUR_API_KEY
+GET https://api.moviesdatabase.com/titles/tt0000270?info=mini_info&api_key=YOUR_API_KEY
